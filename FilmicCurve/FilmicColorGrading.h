@@ -2,8 +2,8 @@
 
 #include "../Core/CoreHelpers.h"
 
-#include <Vec3.h>
-#include <Vec4.h>
+#include "../Core/Vec3.h"
+#include "../Core/Vec4.h"
 
 #include "FilmicToneCurve.h"
 
