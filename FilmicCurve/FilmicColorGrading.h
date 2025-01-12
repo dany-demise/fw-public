@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CoreHelpers.h"
+#include "../Core/CoreHelpers.h"
 
 #include <Vec3.h>
 #include <Vec4.h>
