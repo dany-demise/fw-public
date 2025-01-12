@@ -22,32 +22,32 @@ void ALWAYS_ASSERT_RAW(bool cond, const char fileName[], const int lineNum, cons
 
 // Restrict keywords below might be for C++ AMP or some specific compiler extension;
 // keep them if you need them, or remove them otherwise.
-inline float SafeInv(float x) restrict(amp) restrict(cpu)
+inline float SafeInv(float x)
 {
     return x == 0 ? 0.0f : 1.0f/x;
 }
 
-inline float FastSqr(float x) restrict(amp) restrict(cpu)
+inline float FastSqr(float x)
 {
     return x*x;
 }
 
-inline float MaxFloat(float x, float y) restrict(amp) restrict(cpu)
+inline float MaxFloat(float x, float y)
 {
     return x > y ? x : y;
 }
 
-inline float MinFloat(float x, float y) restrict(amp) restrict(cpu)
+inline float MinFloat(float x, float y)
 {
     return x < y ? x : y;
 }
 
-inline int MaxInt(int x, int y) restrict(amp) restrict(cpu)
+inline int MaxInt(int x, int y)
 {
     return x > y ? x : y;
 }
 
-inline int MinInt(int x, int y) restrict(amp) restrict(cpu)
+inline int MinInt(int x, int y)
 {
     return x < y ? x : y;
 }
@@ -57,17 +57,17 @@ inline float RandNorm()
     return static_cast<float>(rand() % 10001) / 10000.0f;
 }
 
-inline float Abs(float f) restrict(amp) restrict(cpu)
+inline float Abs(float f)
 {
     return f >= 0.0f ? f : -f;
 }
 
-inline float Saturate(float x) restrict(amp) restrict(cpu)
+inline float Saturate(float x)
 {
     return MaxFloat(0.0f, MinFloat(1.0f, x));
 }
 
-inline float Saturate255(float x) restrict(amp) restrict(cpu)
+inline float Saturate255(float x)
 {
     return MaxFloat(0.0f, MinFloat(255.0f, x));
 }
@@ -78,7 +78,7 @@ inline unsigned char ColorToChar(float x)
 }
 
 template <class A>
-inline void Swap(A & lhs, A & rhs) restrict(amp) restrict(cpu)
+inline void Swap(A & lhs, A & rhs)
 {
     A temp = lhs;
     lhs = rhs;
