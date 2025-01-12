@@ -1,137 +1,124 @@
 #ifndef _CORE_HELPERS_H_
 #define _CORE_HELPERS_H_
 
-#include <Windows.h>
-#include <stdio.h>
+// Remove #include <Windows.h>
+#include <cstdio>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <cassert>
+
+// If you still need Windows COM stuff, you might include <unknwn.h> for IUnknown,
+// but if not needed, you can just rely on your own interfaces.
 
 #define ASSERT_ALWAYS(expression) ALWAYS_ASSERT_RAW(expression,__FILE__,__LINE__,__FUNCTION__,#expression)
 
 void ALWAYS_ASSERT_RAW(bool cond, const char fileName[], const int lineNum, const char funcName[], const char expression[]);
 
+// Safe release macro for COM objects or any object with a Release() method
 #define MY_SAFE_RELEASE(p) { if (p!=NULL) { p->Release(); p = NULL; } }
 
+// Restrict keywords below might be for C++ AMP or some specific compiler extension;
+// keep them if you need them, or remove them otherwise.
 inline float SafeInv(float x) restrict(amp) restrict(cpu)
 {
-	return x == 0 ? 0.0f : 1.0f/x;
+    return x == 0 ? 0.0f : 1.0f/x;
 }
 
 inline float FastSqr(float x) restrict(amp) restrict(cpu)
 {
-	return x*x;
+    return x*x;
 }
 
 inline float MaxFloat(float x, float y) restrict(amp) restrict(cpu)
 {
-	return x > y ? x : y;
+    return x > y ? x : y;
 }
 
 inline float MinFloat(float x, float y) restrict(amp) restrict(cpu)
 {
-	return x < y ? x : y;
+    return x < y ? x : y;
 }
 
 inline int MaxInt(int x, int y) restrict(amp) restrict(cpu)
 {
-	return x > y ? x : y;
+    return x > y ? x : y;
 }
 
 inline int MinInt(int x, int y) restrict(amp) restrict(cpu)
 {
-	return x < y ? x : y;
+    return x < y ? x : y;
 }
 
 inline float RandNorm()
 {
-	return float(rand()%10001)/10000.0f;
+    return static_cast<float>(rand() % 10001) / 10000.0f;
 }
 
 inline float Abs(float f) restrict(amp) restrict(cpu)
 {
-	return f >= 0.0f ? f : -f;
+    return f >= 0.0f ? f : -f;
 }
 
 inline float Saturate(float x) restrict(amp) restrict(cpu)
 {
-	return MaxFloat(0.0f,MinFloat(1.0f,x));
+    return MaxFloat(0.0f, MinFloat(1.0f, x));
 }
 
 inline float Saturate255(float x) restrict(amp) restrict(cpu)
 {
-	return MaxFloat(0.0f,MinFloat(255.0f,x));
+    return MaxFloat(0.0f, MinFloat(255.0f, x));
 }
 
 inline unsigned char ColorToChar(float x)
 {
-	return (unsigned char)Saturate255(x*256.0f);
+    return static_cast<unsigned char>(Saturate255(x * 256.0f));
 }
 
 template <class A>
 inline void Swap(A & lhs, A & rhs) restrict(amp) restrict(cpu)
 {
-	A temp = lhs;
-	lhs = rhs;
-	rhs = temp;
+    A temp = lhs;
+    lhs = rhs;
+    rhs = temp;
 }
-
 
 inline std::string FourDigitString(int i)
 {
-	char camName[2048];
-	sprintf(camName,"%04d",i);
-	return std::string(camName);
+    char camName[2048];
+    std::sprintf(camName, "%04d", i);
+    return std::string(camName);
 }
 
-
-inline unsigned __int64 GetQualityTimeMicroSec()
+// Replaced QueryPerformance* calls with <chrono>
+inline unsigned long long GetQualityTimeMicroSec()
 {
-	LARGE_INTEGER freq;
-	LARGE_INTEGER currTime;
-	BOOL bRet;
-	bRet = QueryPerformanceFrequency(&freq);
-	ASSERT_ALWAYS(bRet);
-
-	bRet = QueryPerformanceCounter(&currTime);
-	ASSERT_ALWAYS(bRet);
-
-	double numSec = ((double)currTime.QuadPart)/((double)freq.QuadPart);
-	unsigned __int64 microSec = (unsigned __int64)(numSec * 1000000.0);
-	return microSec;
-
+    using namespace std::chrono;
+    // Return the current time since epoch in microseconds:
+    auto now = high_resolution_clock::now();
+    return duration_cast<microseconds>(now.time_since_epoch()).count();
 }
-
-
-
 
 template <class A, class B>
 inline A AlignSize(A x, B size)
 {
-	return (((x+size)-1)/size)*size;
-/*
-	A extra = (x%A(size));
-	A ret = x;
-	if (extra != 0)
-		ret += A(size)-extra;
-	return ret;
-	*/
+    return (((x + size) - 1) / size) * size;
 }
 
-inline unsigned __int64 AlignSize64(unsigned __int64 x, unsigned __int64 size)
+inline unsigned long long AlignSize64(unsigned long long x, unsigned long long size)
 {
-	return (((x+size)-1)/size)*size;
+    return (((x + size) - 1) / size) * size;
 }
 
 inline unsigned int AlignSize32(unsigned int x, unsigned int size)
 {
-	return (((x+size)-1)/size)*size;
+    return (((x + size) - 1) / size) * size;
 }
 
-
+// These two functions must be defined somewhere else or in this header:
 std::string GetNextLineFromFile(FILE * fin, bool & isEof);
-
 std::string LocalTimeAsString();
 
-
-#endif
-
+#endif // _CORE_HELPERS_H_
