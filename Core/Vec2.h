@@ -5,23 +5,23 @@
 
 struct Vec2
 {
-	Vec2() restrict(amp) restrict(cpu)
+	Vec2() 
 	{
 		x = y = 0;
 	}
 
-	Vec2(float v) restrict(amp) restrict(cpu)
+	Vec2(float v) 
 	{
 		x = y = v;
 	}
 
-	Vec2(float _x, float _y) restrict(amp) restrict(cpu)
+	Vec2(float _x, float _y) 
 	{
 		x = _x;
 		y = _y;
 	}
 
-	float LengthSqr() const restrict(amp) restrict(cpu)
+	float LengthSqr() const 
 	{
 		return x*x + y*y;
 	}
@@ -54,13 +54,13 @@ struct Vec2
 
 struct IntVec2
 {
-	IntVec2() restrict(amp) restrict(cpu)
+	IntVec2() 
 	{
 		x = 0;
 		y = 0;
 	}
 
-	IntVec2(int _x, int _y) restrict(amp) restrict(cpu)
+	IntVec2(int _x, int _y) 
 	{
 		x = _x;
 		y = _y;
@@ -72,67 +72,67 @@ struct IntVec2
 
 
 
-inline Vec2 operator*(const Vec2 & lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator*(const Vec2 & lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs.x*rhs.x,lhs.y*rhs.y);
 }
 
-inline Vec2 operator*(float lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator*(float lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs*rhs.x,lhs*rhs.y);
 }
 
-inline Vec2 operator*(const Vec2 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator*(const Vec2 & lhs, float rhs) 
 {
 	return Vec2(lhs.x*rhs,lhs.y*rhs);
 }
 
-inline Vec2 operator+(const Vec2 & lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator+(const Vec2 & lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs.x+rhs.x,lhs.y+rhs.y);
 }
 
-inline Vec2 operator+(float lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator+(float lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs+rhs.x,lhs+rhs.y);
 }
 
-inline Vec2 operator+(const Vec2 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator+(const Vec2 & lhs, float rhs) 
 {
 	return Vec2(lhs.x+rhs,lhs.y+rhs);
 }
 
-inline Vec2 operator/(const Vec2 & lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator/(const Vec2 & lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs.x/rhs.x,lhs.y/rhs.y);
 }
 
-inline Vec2 operator/(float lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator/(float lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs/rhs.x,lhs/rhs.y);
 }
 
-inline Vec2 operator/(const Vec2 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator/(const Vec2 & lhs, float rhs) 
 {
 	return Vec2(lhs.x/rhs,lhs.y/rhs);
 }
 
-inline Vec2 operator-(const Vec2 & lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator-(const Vec2 & lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs.x-rhs.x,lhs.y-rhs.y);
 }
 
-inline Vec2 operator-(float lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator-(float lhs, const Vec2 & rhs) 
 {
 	return Vec2(lhs-rhs.x,lhs-rhs.y);
 }
 
-inline Vec2 operator-(const Vec2 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec2 operator-(const Vec2 & lhs, float rhs) 
 {
 	return Vec2(lhs.x-rhs,lhs.y-rhs);
 }
 
-inline Vec2 & operator+=(Vec2 & lhs, const Vec2 & rhs) restrict(amp) restrict(cpu)
+inline Vec2 & operator+=(Vec2 & lhs, const Vec2 & rhs) 
 {
 	lhs = lhs+rhs;
 	return lhs;

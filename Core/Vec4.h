@@ -6,17 +6,17 @@
 
 struct Vec4
 {
-	Vec4() restrict(amp) restrict(cpu)
+	Vec4() 
 	{
 		x = y = z = w = 0;
 	}
 
-	Vec4(float val) restrict(amp) restrict(cpu)
+	Vec4(float val) 
 	{
 		x = y = z = w = val;
 	}
 
-	Vec4(float _x, float _y, float _z, float _w) restrict(amp) restrict(cpu)
+	Vec4(float _x, float _y, float _z, float _w) 
 	{
 		x = _x;
 		y = _y;
@@ -26,7 +26,7 @@ struct Vec4
 
 	float x, y, z, w;
 
-	static Vec4 Min(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+	static Vec4 Min(const Vec4 & lhs, const Vec4 & rhs) 
 	{
 		Vec4 ret;
 		ret.x = MinFloat(lhs.x,rhs.x);
@@ -37,7 +37,7 @@ struct Vec4
 		return ret;
 	}
 
-	static Vec4 Max(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+	static Vec4 Max(const Vec4 & lhs, const Vec4 & rhs) 
 	{
 		Vec4 ret;
 		ret.x = MaxFloat(lhs.x,rhs.x);
@@ -53,49 +53,49 @@ struct Vec4
 		return Vec3(x,y,z);
 	}
 
-	static float Dot(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+	static float Dot(const Vec4 & lhs, const Vec4 & rhs) 
 	{
 		return lhs.x*rhs.x + lhs.y*rhs.y + lhs.z*rhs.z + lhs.w*rhs.w;
 	}
 };
 
-inline Vec4 operator*(const Vec4 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator*(const Vec4 & lhs, float rhs) 
 {
 	return Vec4(lhs.x*rhs,lhs.y*rhs,lhs.z*rhs,lhs.w*rhs);
 }
 
-inline Vec4 operator*(float lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator*(float lhs, const Vec4 & rhs) 
 {
 	return Vec4(lhs*rhs.x,lhs*rhs.y,lhs*rhs.z,lhs*rhs.w);
 }
 
-inline Vec4 operator*(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator*(const Vec4 & lhs, const Vec4 & rhs) 
 {
 	return Vec4(lhs.x*rhs.x,lhs.y*rhs.y,lhs.z*rhs.z,lhs.w*rhs.w);
 }
 
 
-inline Vec4 operator+(const Vec4 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator+(const Vec4 & lhs, float rhs) 
 {
 	return Vec4(lhs.x+rhs,lhs.y+rhs,lhs.z+rhs,lhs.w+rhs);
 }
 
-inline Vec4 operator+(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator+(const Vec4 & lhs, const Vec4 & rhs) 
 {
 	return Vec4(lhs.x+rhs.x,lhs.y+rhs.y,lhs.z+rhs.z,lhs.w+rhs.w);
 }
 
-inline Vec4 operator-(const Vec4 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator-(const Vec4 & lhs, float rhs) 
 {
 	return Vec4(lhs.x-rhs,lhs.y-rhs,lhs.z-rhs,lhs.w-rhs);
 }
 
-inline Vec4 operator-(const Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+inline Vec4 operator-(const Vec4 & lhs, const Vec4 & rhs) 
 {
 	return Vec4(lhs.x-rhs.x,lhs.y-rhs.y,lhs.z-rhs.z,lhs.w-rhs.w);
 }
 
-inline Vec4 & operator+=(Vec4 & lhs, const Vec4 & rhs) restrict(amp) restrict(cpu)
+inline Vec4 & operator+=(Vec4 & lhs, const Vec4 & rhs) 
 {
 	lhs = lhs + rhs;
 	return lhs;

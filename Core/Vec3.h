@@ -5,17 +5,17 @@
 
 struct Vec3
 {
-	Vec3() restrict(amp) restrict(cpu)
+	Vec3() 
 	{
 		x = y = z = 0;
 	}
 
-	Vec3(float val) restrict(amp) restrict(cpu)
+	Vec3(float val) 
 	{
 		x = y = z = val;
 	}
 
-	Vec3(float _x, float _y, float _z) restrict(amp) restrict(cpu)
+	Vec3(float _x, float _y, float _z) 
 	{
 		x = _x;
 		y = _y;
@@ -32,7 +32,7 @@ struct Vec3
 		};
 	};
 
-	static inline Vec3 Cross(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+	static inline Vec3 Cross(const Vec3 & lhs, const Vec3 & rhs) 
 	{
 		Vec3 ret;
 		ret.x = lhs.y * rhs.z - lhs.z * rhs.y;
@@ -41,12 +41,12 @@ struct Vec3
 		return ret;
 	}
 
-	static inline float Dot(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+	static inline float Dot(const Vec3 & lhs, const Vec3 & rhs) 
 	{
 		return lhs.x*rhs.x + lhs.y*rhs.y + lhs.z*rhs.z;
 	}
 
-	inline float LengthSqr() const restrict(amp) restrict(cpu)
+	inline float LengthSqr() const 
 	{
 		return Dot(*this,*this);
 	}
@@ -112,73 +112,73 @@ struct Vec3
 
 
 
-inline Vec3 operator*(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator*(const Vec3 & lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs.x*rhs.x,lhs.y*rhs.y,lhs.z*rhs.z);
 }
 
-inline Vec3 operator*(float lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator*(float lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs*rhs.x,lhs*rhs.y,lhs*rhs.z);
 }
 
-inline Vec3 operator*(const Vec3 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator*(const Vec3 & lhs, float rhs) 
 {
 	return Vec3(lhs.x*rhs,lhs.y*rhs,lhs.z*rhs);
 }
 
-inline Vec3 operator+(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator+(const Vec3 & lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs.x+rhs.x,lhs.y+rhs.y,lhs.z+rhs.z);
 }
 
-inline Vec3 operator+(float lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator+(float lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs+rhs.x,lhs+rhs.y,lhs+rhs.z);
 }
 
-inline Vec3 operator+(const Vec3 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator+(const Vec3 & lhs, float rhs) 
 {
 	return Vec3(lhs.x+rhs,lhs.y+rhs,lhs.z+rhs);
 }
 
-inline Vec3 operator/(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator/(const Vec3 & lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs.x/rhs.x,lhs.y/rhs.y,lhs.z/rhs.z);
 }
 
-inline Vec3 operator/(float lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator/(float lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs/rhs.x,lhs/rhs.y,lhs/rhs.z);
 }
 
-inline Vec3 operator/(const Vec3 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator/(const Vec3 & lhs, float rhs) 
 {
 	return Vec3(lhs.x/rhs,lhs.y/rhs,lhs.z/rhs);
 }
 
-inline Vec3 operator-(const Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator-(const Vec3 & lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs.x-rhs.x,lhs.y-rhs.y,lhs.z-rhs.z);
 }
 
-inline Vec3 operator-(float lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator-(float lhs, const Vec3 & rhs) 
 {
 	return Vec3(lhs-rhs.x,lhs-rhs.y,lhs-rhs.z);
 }
 
-inline Vec3 operator-(const Vec3 & lhs, float rhs) restrict(amp) restrict(cpu)
+inline Vec3 operator-(const Vec3 & lhs, float rhs) 
 {
 	return Vec3(lhs.x-rhs,lhs.y-rhs,lhs.z-rhs);
 }
 
-inline Vec3 & operator+=(Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 & operator+=(Vec3 & lhs, const Vec3 & rhs) 
 {
 	lhs = lhs+rhs;
 	return lhs;
 }
 
-inline Vec3 & operator-=(Vec3 & lhs, const Vec3 & rhs) restrict(amp) restrict(cpu)
+inline Vec3 & operator-=(Vec3 & lhs, const Vec3 & rhs) 
 {
 	lhs = lhs-rhs;
 	return lhs;
